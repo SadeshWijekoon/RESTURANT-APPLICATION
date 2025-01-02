@@ -55,8 +55,9 @@ jobs:
 
       # Build and Deploy to Vercel
       - name: Deploy to Vercel
-        env:
-          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}  # Use the token securely from GitHub Secrets
         run: |
           npm install -g vercel
-          vercel deploy --prod --token $VERCEL_TOKEN
+          vercel deploy --prod \
+            --token ${{ secrets.VERCEL_TOKEN }} \
+            --project-id ${{ secrets.VERCEL_PROJECT_ID }} \
+            --org-id ${{ secrets.VERCEL_ORG_ID }}
