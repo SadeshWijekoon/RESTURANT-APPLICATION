@@ -28,6 +28,11 @@ jobs:
           npm install --prefix client
           npm install --prefix server
 
+      # Make jest executable
+      - name: Make jest executable
+        run: |
+          chmod +x node_modules/.bin/jest
+
       # Run client tests
       - name: Run client tests
         run: |
