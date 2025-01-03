@@ -1,6 +1,5 @@
 const request = require('supertest');
-const express = require('express');
-const app     = require('../index')
+const app = require('../index');
 
 // Test for the root route
 describe('GET /', () => {
