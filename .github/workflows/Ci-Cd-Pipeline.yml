@@ -31,6 +31,7 @@ jobs:
 
       - name: Run server tests
         run: |
+          chmod +x server/node_modules/.bin/jest
           npm test --prefix server
 
   deploy:
