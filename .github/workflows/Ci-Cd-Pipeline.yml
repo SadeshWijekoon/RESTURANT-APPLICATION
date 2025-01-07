@@ -1,11 +1,10 @@
-
 name: CI/CD Pipeline
 
 on:
   push:
     branches:
       - dev
-      - main  # Include main branch to ensure deployments run after merging
+      - main  # Ensures deployment after merging to main
   pull_request:
     branches:
       - main
@@ -66,7 +65,4 @@ jobs:
       # Step 4: Deploy to Vercel
       - name: Deploy to Vercel
         run: |
-          vercel deploy --prod \
-            --token ${{ secrets.VERCEL_TOKEN }} \
-            --project-id ${{ secrets.VERCEL_PROJECT_ID }} \
-            --org-id ${{ secrets.VERCEL_ORG_ID }}
+          vercel deploy --prod --token ${{ secrets.VERCEL_TOKEN }}
