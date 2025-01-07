@@ -1,20 +1,25 @@
-const express = require('express');
-const app = express();
-const PORT = 5000;
+import express from 'express'
+import dotenv from 'dotenv'
+dotenv.config()
+import connectDB from './config/connectDB.js'
 
-// Middleware
-app.use(express.json());
+const app = express()
 
-// Test Route
-app.get('/', (req, res) => {
-    res.send('Server is running!');
-});
+app.use(express.json())
 
-// Start Server
-if (process.env.NODE_ENV !== 'test') {
-    app.listen(PORT, () => {
-        console.log(`Server is running on http://localhost:${PORT}`);
-    });
-}
+const PORT = 5000 || process.env.PORT 
 
-module.exports = app;
+app.get("/",(request,response)=>{
+    ///server to client
+    response.json({
+        message : "Server is running " + PORT
+    })
+})
+
+
+connectDB().then(()=>{
+    app.listen(PORT,()=>{
+        console.log("Server is running",PORT)
+    })
+})
+
