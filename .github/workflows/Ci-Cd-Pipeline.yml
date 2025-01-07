@@ -1,3 +1,5 @@
+
+
 name: CI/CD Pipeline
 
 on:
@@ -65,4 +67,4 @@ jobs:
       # Step 4: Deploy to Vercel
       - name: Deploy to Vercel
         run: |
-          vercel deploy --prod --token ${{ secrets.VERCEL_TOKEN }}
+          vercel deploy --prod --token ${{ secrets.VERCEL_TOKEN }} --yes
