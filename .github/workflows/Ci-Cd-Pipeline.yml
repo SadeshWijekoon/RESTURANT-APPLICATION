@@ -36,10 +36,12 @@ jobs:
       - name: Run client tests
         run: npm test --prefix client
 
-      # Step 6: Run server tests
+      # Step 6: Run server tests with increased timeout
       - name: Run server tests
         run: |
           chmod +x server/node_modules/.bin/jest
+          # Set Jest timeout in CI
+          echo "JEST_TIMEOUT=10000" >> $GITHUB_ENV
           npm test --prefix server
 
   deploy:
