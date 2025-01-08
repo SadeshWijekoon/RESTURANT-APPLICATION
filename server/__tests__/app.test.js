@@ -19,6 +19,8 @@ app.get('/', (req, res) => {
 
 // Mock database connection
 beforeAll(async () => {
+    jest.setTimeout(10000); // Increase timeout for database connection and setup
+
     try {
         await connectDB();
         console.log('✅ Connected to the test database.');
@@ -42,5 +44,5 @@ describe('Server Tests', () => {
 afterAll(async () => {
     console.log('🔄 Cleaning up after tests.');
     // Example: Close DB connection if needed
-    mongoose.connection.close();
+    await mongoose.connection.close();
 });
