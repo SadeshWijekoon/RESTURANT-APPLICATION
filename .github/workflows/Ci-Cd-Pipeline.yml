@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - dev
+      - main  # Ensures deployment after merging to main
   pull_request:
     branches:
       - main
@@ -61,10 +62,7 @@ jobs:
       - name: Install Vercel CLI
         run: npm install -g vercel
 
-      # Step 4: Deploy to Vercel
+      # Step 4: Deploy to Vercel with a valid project name
       - name: Deploy to Vercel
         run: |
-          vercel deploy --prod \
-            --token ${{ secrets.VERCEL_TOKEN }} \
-            --project-id ${{ secrets.VERCEL_PROJECT_ID }} \
-            --org-id ${{ secrets.VERCEL_ORG_ID }}
+          vercel deploy --prod --token ${{ secrets.VERCEL_TOKEN }} --yes --name "my-valid-project-name"
