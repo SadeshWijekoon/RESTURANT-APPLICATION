@@ -2,6 +2,7 @@ import express from 'express'
 import dotenv from 'dotenv'
 dotenv.config()
 import connectDB from './config/connectDB.js'
+import userRouter from './route/user.route.js'
 
 const app = express()
 
@@ -16,6 +17,7 @@ app.get("/",(request,response)=>{
     })
 })
 
+app.use('/api/user',userRouter)
 
 connectDB().then(()=>{
     app.listen(PORT,()=>{
