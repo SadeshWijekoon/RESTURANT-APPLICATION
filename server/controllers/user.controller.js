@@ -3,8 +3,7 @@ import bcryptjs from 'bcryptjs'
 import generatedAccessToken from '../utils/generatedAccessToken.js'
 import genertedRefreshToken from '../utils/generatedRefreshToken.js'
 import uploadImageClodinary from '../utils/uploadImageClodinary.js'
-import generatedOtp from '../utils/generatedOtp.js'
-import forgotPasswordTemplate from '../utils/forgotPasswordTemplate.js'
+
 import jwt from 'jsonwebtoken'
 
 export async function registerUserController(request,response){
