@@ -42,11 +42,5 @@ describe('Server Tests', () => {
 // Optional cleanup after tests
 afterAll(async () => {
     console.log('🔄 Cleaning up after tests.');
-<<<<<<< HEAD
-    // Example: Close DB connection if needed
-    await mongoose.connection.close();
-});
-=======
     await mongoose.connection.close(); // Properly close the database connection
 });
->>>>>>> dev
