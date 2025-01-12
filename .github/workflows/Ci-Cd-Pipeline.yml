@@ -25,19 +25,23 @@ jobs:
 
       # Step 3: Install dependencies for client and server
       - name: Install client dependencies
-        run: npm install --prefix client  # Use Vite in the client folder
+        run: npm install --prefix client  # Install client dependencies
       - name: Install server dependencies
-        run: npm install --prefix server
+        run: npm install --prefix server  # Install server dependencies
 
       # Step 4: Set up MongoDB environment variable
       - name: Set environment variables
         run: echo "MONGO_URI=${{ secrets.MONGO_URI }}" >> $GITHUB_ENV
 
-      # Step 5: Run client tests (Vite uses Jest or any other testing framework)
+      # Step 5: Install Jest Environment (if not installed already)
+      - name: Install Jest Environment
+        run: npm install jest-environment-jsdom@29.7.0 --prefix client
+
+      # Step 6: Run client tests (Vite uses Jest or any other testing framework)
       - name: Run client tests
         run: npm test --prefix client  # Run Vite client tests
 
-      # Step 6: Run server tests
+      # Step 7: Run server tests
       - name: Run server tests
         run: |
           chmod +x server/node_modules/.bin/jest
