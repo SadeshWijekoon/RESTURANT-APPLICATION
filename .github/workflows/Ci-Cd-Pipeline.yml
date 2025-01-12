@@ -29,19 +29,23 @@ jobs:
       - name: Install server dependencies
         run: npm install --prefix server  # Install server dependencies
 
-      # Step 4: Set up MongoDB environment variable
+      # Step 4: Install Vite if not already installed
+      - name: Install Vite
+        run: npm install vite --prefix client  # Install Vite in the client directory
+
+      # Step 5: Set up MongoDB environment variable
       - name: Set environment variables
         run: echo "MONGO_URI=${{ secrets.MONGO_URI }}" >> $GITHUB_ENV
 
-      # Step 5: Install Jest Environment (if not installed already)
+      # Step 6: Install Jest Environment (if not installed already)
       - name: Install Jest Environment
         run: npm install jest-environment-jsdom@29.7.0 --prefix client
 
-      # Step 6: Run client tests (Vite uses Jest or any other testing framework)
+      # Step 7: Run client tests (Vite uses Jest or any other testing framework)
       - name: Run client tests
         run: npm test --prefix client  # Run Vite client tests
 
-      # Step 7: Run server tests
+      # Step 8: Run server tests
       - name: Run server tests
         run: |
           chmod +x server/node_modules/.bin/jest
@@ -66,13 +70,17 @@ jobs:
       - name: Install Vercel CLI
         run: npm install -g vercel
 
-      # Step 4: Build client for Vercel deployment (Vite build step)
+      # Step 4: Install Vite (again to ensure it's available in the deploy step)
+      - name: Install Vite
+        run: npm install vite --prefix client
+
+      # Step 5: Build client for Vercel deployment (Vite build step)
       - name: Build client
         run: |
           cd client
           npm run build  # Vite's build command to create the production-ready build
 
-      # Step 5: Deploy to Vercel with a valid project name
+      # Step 6: Deploy to Vercel with a valid project name
       - name: Deploy to Vercel
         run: |
           vercel deploy --prod --token ${{ secrets.VERCEL_TOKEN }} --yes --name "my-valid-project-name"
