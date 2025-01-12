@@ -25,7 +25,7 @@ jobs:
 
       # Step 3: Install dependencies for client and server
       - name: Install client dependencies
-        run: npm install --prefix client
+        run: npm install --prefix client  # Use Vite in the client folder
       - name: Install server dependencies
         run: npm install --prefix server
 
@@ -33,9 +33,9 @@ jobs:
       - name: Set environment variables
         run: echo "MONGO_URI=${{ secrets.MONGO_URI }}" >> $GITHUB_ENV
 
-      # Step 5: Run client tests
+      # Step 5: Run client tests (Vite uses Jest or any other testing framework)
       - name: Run client tests
-        run: npm test --prefix client
+        run: npm test --prefix client  # Run Vite client tests
 
       # Step 6: Run server tests
       - name: Run server tests
@@ -62,7 +62,13 @@ jobs:
       - name: Install Vercel CLI
         run: npm install -g vercel
 
-      # Step 4: Deploy to Vercel with a valid project name
+      # Step 4: Build client for Vercel deployment (Vite build step)
+      - name: Build client
+        run: |
+          cd client
+          npm run build  # Vite's build command to create the production-ready build
+
+      # Step 5: Deploy to Vercel with a valid project name
       - name: Deploy to Vercel
         run: |
           vercel deploy --prod --token ${{ secrets.VERCEL_TOKEN }} --yes --name "my-valid-project-name"
